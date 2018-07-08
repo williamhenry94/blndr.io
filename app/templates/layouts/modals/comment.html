@@ -1,0 +1,113 @@
+{% block comments %}
+<div class="modal fade" id="comment_modal" tabindex="-1" role="dialog" aria-labelledby="comment_modal_title" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content" id="comment-placeholder">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Rate This Repo</h5>
+        
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h6><strong>We would like to know about the software you built.</strong></h6>
+        <div class="form-group">
+                   
+          <label for="application_name" class="input-group-text">Application Name</label>
+  
+          <input class="form-control" name="application_name" id="application_name" v-model="application_name"/>
+          <div class="info-error" v-if ="error_application_name.length >0">
+            <p v-for="e in error_application_name">
+              {% raw %}{{e}}{% endraw %}
+            </p>
+          </div>
+        </div>
+        <div class="form-group">
+                   
+          <label for="platform" class="input-group-text">Platform Type</label>
+  
+          <select name="platform" id="platform" class="form-control" v-model="platform">
+            <optgroup label="Mobile">
+                <option value="mobile:ios">iOS</option>
+                <option value="mobile:android">Android</option>
+                <option value="mobile:tizen">Tizen</option>
+                <option value="mobile:windows">Windows</option>
+            </optgroup>
+            <optgroup label="Smart Watch">
+                <option value="watch:watchos">watchOs</option>
+                <option value="watch:wearos">Google wearOs</option>
+            </optgroup>
+            <optgroup label="Desktop">
+                <option value="desktop:windows">Windows</option>
+                <option value="desktop:macos">macOs</option>
+                <option value="desktop:chromeos">Chrome OS</option>
+                <option value="desktop:linux">Linux</option>
+            </optgroup>
+            <optgroup label="Web">
+                <option value="web">Web</option>
+            </optgroup>
+           
+            <option value="others">Others</option>
+          </select>
+
+          <div class="info-error" v-if ="error_platform.length >0">
+            <p  v-for="e in error_platform">
+              {% raw %}{{e}}{% endraw %}
+            </p>
+          </div>
+        </div>
+        <div class="form-group">
+                   
+          <label for="website" class="input-group-text">Website</label>
+  
+          <input class="form-control" name="website" id="website" v-model="website"/>
+          <div class="info-error" v-if ="error_website.length >0">
+            <p v-for="e in error_website">
+              {% raw %}{{e}}{% endraw %}
+            </p>
+          </div>
+        </div>
+        <h6><strong>How do you feel about this tool?</strong></h6>
+        <div class="row row-clean">
+          <label class="radio-inline">
+            <input type="radio" name="rating" id="inlineRating1" class="black-font" value="1" v-model="rating"> 1
+          </label>
+          <label class="radio-inline">
+            <input type="radio" name="rating" id="inlineRating2" class="black-font" v-model="rating" value="2"> 2
+          </label>
+          <label class="radio-inline">
+            <input type="radio" name="rating" id="inlineRating3" class="black-font" value="3" v-model="rating"> 3
+          </label> 
+          <label class="radio-inline">
+            <input type="radio" name="rating" id="inlineRating4" class="black-font" value="4" v-model="rating"> 4
+          </label>  
+          <label class="radio-inline">
+            <input type="radio" name="rating" id="inlineRating5" class="black-font" value="5" v-model="rating"> 5
+          </label> 
+        </div>
+        <div class="info-error" v-if ="error_rating.length >0 ">
+          <p v-for="e in error_rating">
+            {% raw %}{{e}}{% endraw %}
+          </p>
+        </div> 
+        
+        <div class="form-group">
+                    
+            <label for="comment" class="input-group-text">Comment</label>
+    
+            <textarea id="comment" rows="5" class="form-control" name="comment" style="resize:none;" v-model="comment"></textarea>
+            <div class="info-error" v-if="error_comment.length >0">
+              <p v-for="e in error_comment">
+                {% raw %}{{e}}{% endraw %}
+              </p>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-warning" data-repo-id="{{repo.id}}" data-full-name="{{repo.full_name}}" v-on:click="sendComment">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

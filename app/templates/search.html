@@ -1,0 +1,107 @@
+{% extends "layouts/index.html" %}
+{% block contents %}
+<div class="container top-level">
+    <div class="row">
+        <div class="col-md-8 col-sm-12 col-lg-8 order-2 ">
+            <h2>Search: React</h2>
+            <div id="project-highlights">
+                <div class="row">
+                    <div class="col-md-10 col-lg-10 col-sm-12 order-2 " v-for="project in project_highlights">
+                        <div class="card mb-2">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <img :src="project.owner.avatar_url" alt="Avatar" class="rounded-image">
+                                    {% raw %}{{project.name}}{% endraw %}
+                                </h5>
+                                <h6 class="card-subtitle mb-2 text-muted">{% raw %}{{project.owner.login}}{% endraw %}</h6>
+                                <div class="card-text">
+                                    <div class="row row-clean">
+                                        <span class="right-space"><i class="fas fa-star"></i> {% raw %}{{project.stargazers_count}}{% endraw %}</span>
+                                        <span class="right-space"><i class="fas fa-code-branch"></i> {% raw %}{{project.forks_count}}{% endraw %}</span>
+                                        <span class="right-space"><i class="fas fa-times-circle"></i> {% raw %}{{project.issues}}{% endraw %}</span>
+                                    </div>
+                                    <div class="row row-clean">
+                                        <span class="badge badge-pill badge-info right-space-sm">{% raw %}{{project.language}}{% endraw %}</span>
+                                        <span class="badge badge-pill badge-light">2 days ago</span>
+                                    </div>
+                                    
+                                </div>
+                                <a :href="'/repo/'+project.full_name" class="card-link">Detail</a>
+                                
+                                <a v-bind:href="project.url" class="card-link">Download</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+            </div>
+        </div>
+        <div class="col col-md-4 col-sm-12 col-lg-4  order-1 ">
+            <div class="container">
+                <div class="form-group">
+                   
+                    <label for="language" class="input-group-text">Language</label>
+            
+                    <select id="language"class="form-control">
+                        <option>JavaScript</option>
+                        <option>Python</option>
+                        <option>Java</option>
+                        <option>Ruby</option>
+                        <option>PHP</option>
+                        <option>Swift</option>
+                        <option>C#</option>
+                        <option>C++</option>
+                        <option>C</option>
+                        <option>GoLang</option>
+                        <option>Scala</option>
+                        <option>Kotlin</option>
+                        <option>Clojure</option>
+                        <option>Rust</option>
+                        <option>Haskell</option>
+                        <option>Elixir</option>
+                        <option>Dart</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                   
+                    <label for="sort" class="input-group-text">Sort By</label>
+                    
+                    <select id="sort" class="form-control">
+                        <option value="stars">Star</option>
+                        <option value="updated">Latest Update</option>
+                        <option value="forks">Forks</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                   
+                    <label for="sort" class="input-group-text">Order</label>
+                   
+                    <select id="sort" class="form-control">
+                        <option value="desc">Descending</option>
+                        <option value="asc">Ascending</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                   
+                   <label for="sort" class="input-group-text">License</label>
+                  
+                   <select id="sort" class="form-control">
+                       <option>MIT License</option>
+                       <option>GNU</option>
+                       <option>Apache</option>
+                   </select>
+               </div>
+            </div>
+        </div>
+    </div>
+   
+
+   
+    
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<script src="{{ url_for('static', filename='scripts/app.js') }}"></script>
+{% endblock %}

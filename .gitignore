@@ -1,0 +1,9 @@
+dump.rdb
+app/.env
+.vscode
+app/node_modules
+app/__pycache__
+app/controllers/__pycache__
+app/forms/__pycache__
+app/helpers/__pycache__
+app/models/__pycache__

@@ -1,0 +1,14 @@
+{% extends "layouts/index.html" %}
+{% block contents %}
+<div class="container top-level">
+    <div id="markdown" data-md="{{readme}}">
+        <div class="card">
+            <div class="card-body justify-content-start md-content-core" v-html="markdown" ></div>
+        </div>
+    </div>
+</div>
+{% endblock%}
+{% block javascript %}
+<script src='https://cdnjs.cloudflare.com/ajax/libs/markdown-it/8.4.1/markdown-it.min.js'></script>
+<script src="{{ url_for('static', filename='scripts/markdown.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,177 @@
+{% extends "layouts/index.html" %}
+{% block contents %}
+<div class="container top-level">
+    <div class="row">
+        <div class="col-md-8 col-sm-12 col-lg-8">
+            <div class="container">
+                <h2>{{repo.name}}</h2>
+            
+                <p>
+                    <small  class="grey">{{repo.owner.login}}</small> 
+                    <span class="badge badge-pill badge-info">{{repo.language}}</span>
+                </p>
+            
+                <div class="row row-clean">
+                 
+                    <div class="col-md-2 col-sm-2 col-lg-2">
+                        <div class="row"><span><strong>Updated</strong></span></div>
+                        <div class="row">
+                            <span class="right-space">2 days ago</span>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-2 col-lg-2">
+                        <div class="row"><span><strong>Stars</strong></span></div>
+                        <div class="row">
+                            <span class="right-space"><i class="fas fa-star"></i> {{repo.stargazers_count}}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-2 col-lg-2">
+                        <div class="row"><span><strong>Forks</strong></span></div>
+                        <div class="row">
+                            <span class="right-space"> <i class="fas fa-code-branch"></i> {{repo.forks_count}}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-2 col-sm-2 col-lg-2">
+                        <div class="row"><span><strong>Open Issues</strong></span></div>
+                        <div class="row">
+                            <span class="right-space"> <i class="fas fa-times-circle"></i> {{repo.open_issues_count}}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-sm-12 col-lg-4">
+                        <div class="row"><span><strong>License</strong></span></div>
+                        <div class="row">
+                            <span class="right-space">{{repo.license.name}}</span>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+            <div class="container top-level">
+                <p>{{repo.description}}</p> 
+            </div>
+
+            <div class="container top-level">
+                <div id="markdown" data-md="{{readme}}">
+                    <div class="card">
+                        <div class="card-body justify-content-start md-content" v-html="markdown" ></div>
+                        <div class="card-footer text-muted text-center">
+                            <a href="/readme/{{repo.full_name}}"target="_blank">Open in New Tab</a>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="container top-level">
+                <div id="stack-questions">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-dark" href="#" v-on:click="showComments" data-repo-id="{{repo.id}}">
+                                <i class="fas fa-comments"></i> Comments
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-link-dark active" href="#"><i class="fab fa-stack-overflow"></i> Stackoverflow Discussion</a>
+                        </li>
+                    </ul>
+                
+                
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12 col-sm-12" v-for="question in stack_questions">
+                            <div class="card card-highlight" >
+                                <div class="card-body">
+                                    <h5 class="card-title">{% raw %}{{question.title}}{% endraw %}</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">{% raw %}{{question.owner.display_name}}{% endraw %}</h6>
+                                    <div class="card-text">
+                                        <div class="row row-clean">
+                                            <small>2 days ago</small>
+                                        </div>
+                                        <div class="row row-clean">
+                                            <span class="badge badge-pill badge-info right-space-sm" v-for="q in question.tags">{% raw %}{{q}}{% endraw %}</span>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                </div>
+            
+            </div>
+        </div>
+
+        <div class="col-md-4 col-sm-12 col-lg-4">
+            <div class="container">
+                <div class="card card-body" style="width:100%">
+                    <div class="container">
+                        <div class="row row-space">
+                            <a href="{{repo.html_url}}" class="btn  btn-info btn-row"> 
+                                <i class="fab fa-github"></i> Check Github
+                            </a>
+                        </div>
+                        {# <div class="row row-space">
+                            <a href="{{repo.html_url}}" class="btn btn-warning btn-row"> 
+                                <i class="fab fa-readme"></i> show readme.md
+                            </a>
+                        </div> #}
+                        <div class="row-space">
+                            <p align="center">
+                                <span>
+                                    <i class="fas fa-star yellow"></i>
+                                    <i class="fas fa-star yellow"></i>
+                                    <i class="fas fa-star yellow"></i>
+                                    <i class="fas fa-star yellow"></i>
+                                    <i class="fas fa-star yellow"></i>
+                                </span>
+                                <span class="left-spanner">
+                                    <strong>5.0</strong>
+                                </span>
+                            </p>
+                        </div>
+                        <div class="row-space">
+                            <p align="center"> 
+                                <strong>1120 Developers use this</strong>
+                            </p>
+                        </div>
+                        <div class="row row-space">
+                            <a href="#" class="btn btn-raised btn-warning btn-row"  data-toggle="modal" data-target="#comment_modal"> I use this</a>
+                        </div>
+                        
+                        <div class="container row-space">
+                            <div class="row">
+                                <h6>Developers</h6> 
+                            </div>
+                            <div class="row">
+                                <img src="{{repo.owner.avatar_url}}" alt="Avatar" class="rounded-image">
+                                <h3 class="left-md-spanner">{{repo.owner.login}}</h3>
+                            </div>
+                            <div class="row">
+                                <span class="grey"><small><strong>{{repo.owner.type}}</strong></small></span>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include "layouts/modals/comment.html" %}
+{% block comment %}
+
+
+{% endblock %}
+
+
+{% endblock %}
+
+{% block javascript %}
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/markdown-it/8.4.1/markdown-it.min.js'></script>
+<script src="{{ url_for('static', filename='scripts/repo.js') }}"></script>
+<script src="{{ url_for('static', filename='scripts/markdown.js') }}"></script>
+<script src="{{ url_for('static', filename='scripts/comments.js') }}"></script>
+{% endblock %}
