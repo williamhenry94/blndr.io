@@ -22,7 +22,6 @@ load_dotenv(dotenv_path=find_dotenv())
 app.secret_key = os.getenv('SECRET_KEY')
 app.wsgi_app = ProxyFix(app.wsgi_app)
 app.register_blueprint(githubBlueprint)
-app.register_blueprint(projectBlueprint)
 app.register_blueprint(stackoverflowBlueprint)
 app.register_blueprint(ratingBlueprint)
 
